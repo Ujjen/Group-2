@@ -1,10 +1,23 @@
-1. speech recognition
-	- https://pypi.org/project/SpeechRecognition/
-	
+1.security system
+	- voice: microphone
+	- facial: camera
+	- biometric: fingerprint reader/sensor  
+
 2. Tracking device 
+	- for pets/ collars	
+	- perhaps using ip address for locating
 
-3. voice control
-
-4. trivia game using speech recognition 
-
-5. 
+3. speech recognition
+	- https://pypi.org/project/SpeechRecognition/
+	- for tackling communication problems with deaf	
+	
+4. ultrasonic detector(for blind people):
+	- using the ultrasonic program from 130
+	- uses voice narrator to relay information
+	- voice activation 
+	- needs microphone, ultrasonic detector, text-to-speech bot 
+	
+5.  voice control
+	- security 
+	- keyword for any commands
+	- use similar algorithm as the speech recognition	
