@@ -1,0 +1,10 @@
+1. speech recognition
+	- https://pypi.org/project/SpeechRecognition/
+	
+2. Tracking device 
+
+3. voice control
+
+4. trivia game using speech recognition 
+
+5. 
