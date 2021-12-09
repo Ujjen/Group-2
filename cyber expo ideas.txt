@@ -7,4 +7,5 @@
 
 4. trivia game using speech recognition 
 
-5. 
+5. fingerprint recognition
+	- https://learn.adafruit.com/adafruit-optical-fingerprint-sensor/circuitpython
