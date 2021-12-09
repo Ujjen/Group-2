@@ -1,23 +1,23 @@
-1.security system
+1.security system(Elena)
 	- voice: microphone
 	- facial: camera
 	- biometric: fingerprint reader/sensor  
 
-2. Tracking device 
+2. Tracking device(Ujjen) 
 	- for pets/ collars	
 	- perhaps using ip address for locating
 
-3. speech recognition
+3. speech recognition(Ujjen)
 	- https://pypi.org/project/SpeechRecognition/
 	- for tackling communication problems with deaf	
 	
-4. ultrasonic detector(for blind people):
+4. ultrasonic detector(for blind people):(Elena)
 	- using the ultrasonic program from 130
 	- uses voice narrator to relay information
 	- voice activation 
 	- needs microphone, ultrasonic detector, text-to-speech bot 
 	
-5.  voice control
+5.  voice control(Nabinta)
 	- security 
 	- keyword for any commands
 	- use similar algorithm as the speech recognition	
