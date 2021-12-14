@@ -21,4 +21,7 @@
 	- uses voice narrator to relay information
 	- voice activation 
 	- needs microphone, ultrasonic detector, text-to-speech bot 
+
+
+https://iotdesignpro.com/projects/speech-recognition-on-raspberry-pi-for-voice-controlled-home-automation
 	
