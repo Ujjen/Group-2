@@ -6,4 +6,5 @@ HEIGHT = 800
 window = Tk()
 window.geometry("{}x{}".format(WIDTH, HEIGHT))
 window.title("GUI demo")
+window.config(bg='BLACK')
 window.mainloop()
