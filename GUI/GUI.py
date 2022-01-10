@@ -16,10 +16,13 @@ l = Label(window, text = "Voice Authentication System", bg = "black", bd = 100, 
 l.pack()
 
 # buttons
-b1 = Button(window, text="button 1", bd = 5, bg = "pink", fg = "blue", font=("Helvetica", 12), justify = CENTER)
-b1.pack()
+b1 = Button(window, text="button 1", bg = "pink", fg = "blue", font=("Helvetica", 12), justify = CENTER)
+b1.pack(side=LEFT)
 
-b2 = Button(window, text="button 2", bd = 5, bg = "pink", fg = "blue", font=("Helvetica", 12), justify = CENTER)
-b2.pack()
+b2 = Button(window, text="button 2", bg = "pink", fg = "blue", font=("Helvetica", 12), justify = CENTER)
+b2.pack(side=RIGHT)
+
 
 window.mainloop()
+
+
