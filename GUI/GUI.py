@@ -17,10 +17,10 @@ l.pack()
 
 # buttons
 b1 = Button(window, text="button 1", bg = "pink", fg = "blue", font=("Helvetica", 12), justify = CENTER)
-b1.pack(side=LEFT)
+b1.place(x=100, y=400)
 
 b2 = Button(window, text="button 2", bg = "pink", fg = "blue", font=("Helvetica", 12), justify = CENTER)
-b2.pack(side=RIGHT)
+b2.place(x=600, y=400)
 
 
 window.mainloop()
