@@ -1,4 +1,3 @@
-
 import tkinter as tk
 from tkinter.filedialog import askopenfilename,asksaveasfilename
 
@@ -44,4 +43,5 @@ btn_save.grid(row = 1, column = 0, sticky = "ew", padx = 5)
 fr_buttons.grid(row = 0, column = 0, sticky = "ns")
 txt_edit.grid(row = 0, column = 1, sticky = "nsew")
 
-window.mainloop()
+
+
