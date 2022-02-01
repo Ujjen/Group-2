@@ -1,3 +1,5 @@
+#implement with the GPIO when pressing button to record
+
 import pyaudio
 import wave
 
@@ -33,7 +35,7 @@ print("Recording...")
 for i in range(int(sample_rate / chunk * record_seconds)):
     data = stream.read(chunk)
     frames.append(data)
-print("Finished recording")
+print("Finished recording.")
 
 # stop and close stream
 stream.stop_stream()

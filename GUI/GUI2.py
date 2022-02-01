@@ -1,7 +1,53 @@
-import tkinter as tk
+from tkinter import *
+import numpy as np
 from tkinter.filedialog import askopenfilename,asksaveasfilename
+import librosa
+import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
+from dtw import dtw
+from scipy.io.wavfile import read
+import pyaudio
+import wave
+# import RPi.GPIO as GPIO
 #ssimport audiofilesforexpo
 
+LARGE_FONT = ("Verdana", 12)
+
+class GUI(Canvas):
+    def __init__(self,master):
+        super().__init__(master, bg="white", width="800",height="600")
+        t= Label(master, text = 'GUI2', font=('Arial, 25'))
+        
+        t.pack()
+
+    def buildGui(self, master):
+        super().__init__(master)
+        # Change buttons to GPIO record and save
+        btn_open = Button(self, text = "Display", command=lambda: compareAndPlot())
+        btn_open.place(x=0, y=0)
+        btn_save = Button(self, text = "Record", command=lambda: save_file())
+        btn_save.place(x=50, y=0)
+        self.pack()
+
+        
+def compareAndPlot():
+    fig = Figure(figsize = (5, 5), dpi = 100)
+
+    input_data = read(r"C:\Users\r2d26\OneDrive\Desktop\Elenahelpstuff\bird_caw1.wav")
+    audio = input_data[1]
+    plot1 = fig.add_subplot(111)
+    plot1.plot(audio)
+
+
+    canvas = FigureCanvasTkAgg(fig, master = window)
+    canvas.draw()
+    canvas.get_tk_widget().pack()
+    toolbar = NavigationToolbar2Tk(canvas, window)
+    toolbar.update()
+    canvas.get_tk_widget().pack()
+
+    
 def open_file():
     """Open a file for editing"""
     filepath = askopenfilename(
@@ -15,34 +61,46 @@ def open_file():
         txt_edit.insert(tk.end, text)
     window.title(f"Simple Text Editor - {filepath}")
 
+
 def save_file():
-    """Save the current file as a new file."""
-    filepath = asksaveasfilename(
-        defaulttextension = "txt",
-        filetypes = [("Text Files", "*.txt"), ("All Files", "*.*")],
-    )
-    if not filepath:
-        return
-    with open(filepath, "w") as output_file:
-        text = txt_edit.get(1.0, tk.END)
-        output_file.write(text)
-    window.title(f"Voice Authentication System - {filepath}")
+    chunk = 1024
+    sampled_format = pyaudio.paInt16
+    chanels = 2
 
-window = tk.Tk()
-window.title("Voice Authentication System")
-window.rowconfigure(0, minsize = 800, weight = 1)
-window.columnconfigure(1, minsize = 800, weight = 1)
+    smple_rt = 44400
+    seconds = 4
+    filename = r"C:\Users\r2d26\OneDrive\Desktop\Elenahelpstuff\bird_caw2.wav"
 
-txt_edit =  tk.Text(window)
-fr_buttons = tk.Frame(window, relief = tk.RAISED, bd = 2)
-btn_open = tk.Button(fr_buttons, text = "Open", command = open_file)
-btn_save = tk.Button(fr_buttons, text = "Save As...", command = save_file)
+    pa = pyaudio.PyAudio()
 
-btn_open.grid(row = 0, column = 0, sticky = "ew", padx = 5, pady = 5)
-btn_save.grid(row = 1, column = 0, sticky = "ew", padx = 5)
+    stream = pa.open(format=sample_format, channels=chanels,rate=smpl_rt, input=True,frames_per_buffer=chunk)
+    print('Recording...')
+    frames = []
 
-fr_buttons.grid(row = 0, column = 0, sticky = "ns")
-txt_edit.grid(row = 0, column = 1, sticky = "nsew")
+    for i in range(0, int(smpl_rt / chunk * seconds)):
+        data = stream.read(chunk)
+        frames.append(data)
+
+    stream.stop_stream()
+    stream.close()
+    pa.terminate()
+    print('Done !!! ')
+    sf = wave.open(filename, 'wb')
+    sf.setnchannels(chanels)
+    sf.setsampwidth(pa.get_sample_size(sample_format))
+    sf.setframerate(smpl_rt)
+    sf.writeframes(b''.join(frames))
+    sf.close()
+
+WIDTH = 800
+HEIGHT = 600
 
 
+window = Tk()
+window.geometry("{}x{}".format(WIDTH, HEIGHT))
+window.title("GUI2")
+
+s = GUI(window)
+s.buildGui(window)
+window.mainloop()
 
