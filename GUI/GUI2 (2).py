@@ -1,7 +1,7 @@
 from tkinter import *
-import numpy as np
+#import numpy as np
 from tkinter.filedialog import askopenfilename,asksaveasfilename
-import librosa
+#import librosa
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
@@ -12,7 +12,7 @@ import speech_recognition as se
 import wave
 import RPi.GPIO as GPIO
 import math
-#ssimport audiofilesforexpo
+
 
 LARGE_FONT = ("Verdana", 12)
 
@@ -124,10 +124,6 @@ while running:
             running = True
         else:
             running = False
-        
-
-
-
 
 
 
