@@ -2,6 +2,8 @@ import RPi.GPIO as GPIO
 from time import sleep
 import speech_recognition as sr
 import wave
+import game
+from subprocess import Popen
 
 button = 25
 running = True
@@ -38,6 +40,8 @@ while running:
             data2=a.recognize_google(audio2)
             if(data2 == data):
                 print("correct password!!")
+                #opens a py file once the correct password is provided
+                Popen('python game.py')
                 break
             else:
                 print("wrong password try again")
