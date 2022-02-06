@@ -43,7 +43,7 @@ def distance():
 
     if ((sum(distList) // len(disList)) <= 2 and (sum(distList) // len(disList)) >= 0):
         return True
-    else
+    else:
         return False
 
         
