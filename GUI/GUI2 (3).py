@@ -7,7 +7,7 @@ from scipy.io.wavfile import read
 from time import sleep
 import speech_recognition as sr
 import wave
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 import keyboard
 import math
 #ssimport audiofilesforexpo
@@ -105,7 +105,7 @@ while running:
                     continue
             else:
                 print("wrong password try again")
-    if else(GPIO.input(button) == LOW):
+    elif(GPIO.input(button) == LOW):
         print("Push the button to record audio...")
         sleep(5)
         if(keyboard.is_pressed('q')):
