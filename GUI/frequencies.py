@@ -8,15 +8,13 @@ from time import sleep
 import speech_recognition as sr
 import wave
 import RPi.GPIO as GPIO
-import keyboard
 import math
-#ssimport audiofilesforexpo
-
+import subprocess
 
 
 def distance():
-    input_data = read(r"x")
-    password_data = read(r"x")
+    input_data = read(r"/home/pi/speech2.wav")
+    password_data = read(r"/home/pi/speech.wav")
     audio2 = password_data[1]
     audio = input_data[1]
 
@@ -25,14 +23,12 @@ def distance():
 
     print((sum(audio2)+sum(audio))/2)
     return True
-    
-    
 
         
 def plot():
     plt.figure(1, figsize = (30, 10))
-    password_data = read(r"x")#
-    input_data = read(r"x")
+    password_data = read(r"/home/pi/speech.wav")#
+    input_data = read(r"/home/pi/speech2.wav")
     input1 = input_data[1]
     
     password3 = password_data[1]
@@ -47,55 +43,49 @@ def plot():
     distance()
 
 
-    
-
 button = 25
 running = True
-avgL = []
 
 
-#GPIO.setmode(GPIO.BCM)
-#GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 a = sr.Recognizer()
 
-for i in range(0,5):
-    with sr.Microphone() as source:
-        print("Record a password...")
-        audio = a.listen(source)
+with sr.Microphone() as source:
+    print("Record a password...")
+    audio = a.listen(source)
 
         # new addition to save the recording
-        with open(r"x", 'wb') as f:
-            f.write(audio.get_wav_data())
+    with open(r"/home/pi/speech2.wav", 'wb') as f:
+        f.write(audio.get_wav_data())
 
-        temp = read(r"x")
+        temp = read(r"/home/pi/speech2.wav")
         temp_list = temp[1]
         tempAvg = sum(temp) / len(temp)
-        avgL.append(tempAvg)
-
         data=a.recognize_google(audio)
         print("password saved.")
-print(sum(avgL))
-avg = sum(avgL) / len(avgL)
-print(avg)
+        
 while running:
-    if (GPIO.input(button) == HIGH):
+    if (GPIO.input(button) == GPIO.HIGH):
         with sr.Microphone() as source:
             b = sr.Recognizer()
             print("Say something...")
             audio2 = b.listen(source)
             
             # new addition to save the recording
-            with open(r"x", 'wb') as d:
+            with open(r"/home/pi/speech.wav", 'wb') as d:
                 d.write(audio2.get_wav_data())
                 
             data2=b.recognize_google(audio2)
-            print("password: {}".format(data))
-            print("password attempt: {}".format(data2))
-            plot()
+
             distance()
             if(data2 == data):
                 print("correct password!!")
+                subprocess.call(["xdg-open", '/home/pi/Desktop/images-gif'])
+                print("password: {}".format(data))
+                print("password attempt: {}".format(data2))
+                plot()
 
                 if (distance() == True):
                     # unlock the file or whatever
@@ -105,7 +95,8 @@ while running:
                     continue
             else:
                 print("wrong password try again")
-    elif(GPIO.input(button) == LOW):
+                
+    elif(GPIO.input(button) == GPIO.LOW):
         print("Push the button to record audio...")
         sleep(5)
         if(keyboard.is_pressed('q')):
@@ -113,8 +104,5 @@ while running:
         else:
             running = False
         
-
-
-
 
 
