@@ -37,10 +37,12 @@ def plot():
     
     password3 = password_data[1]
 
-    plot1 = fig.add_subplot(111)
+    #plot1 = fig.add_subplot(111)
+    plot1 = fig.add_subplot(150)
     plot1.plot(input1)
 
-    plot2 = fig.add_subplot(212)
+    #plot2 = fig.add_subplot(212)
+    plot2 = fig.add_subplot(275)
     plot2.plot(password3)
     
     canvas = FigureCanvasTkAgg(fig, master = window)
