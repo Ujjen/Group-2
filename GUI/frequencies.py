@@ -100,14 +100,24 @@ for i in range(0,3):
     avg = (sum(avgL) / len(avgL))
 ###
 
+<<<<<<< HEAD
 
 #########################################################################
+=======
+### GUI #####################
+
+>>>>>>> b2734e86b192e34521064e0bd9558fe404053292
 window = Tk()
 window.geometry("500x500")
 clear_button = Button(master = window, command = clear, height = 2, width = 10, text = "Clear")
 clear_button.pack()
 
+<<<<<<< HEAD
 ##########################################################################
+=======
+############################
+
+>>>>>>> b2734e86b192e34521064e0bd9558fe404053292
     
 while running:
     if (GPIO.input(button) == GPIO.HIGH):
@@ -148,4 +158,8 @@ while running:
         else:
             running = False
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> b2734e86b192e34521064e0bd9558fe404053292
 window.mainloop()
