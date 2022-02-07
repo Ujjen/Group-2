@@ -76,7 +76,7 @@ GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 a = sr.Recognizer()
 avgL = [] 
-for i in range(0,5):
+for i in range(0,3):
     with sr.Microphone() as source:
         print("Record a password...")
         audio = a.listen(source)
@@ -100,6 +100,14 @@ for i in range(0,5):
     avg = (sum(avgL) / len(avgL))
 ###
 
+
+#########################################################################
+window = Tk()
+window.geometry("500x500")
+clear_button = Button(master = window, command = clear, height = 2, width = 10, text = "Clear")
+clear_button.pack()
+
+##########################################################################
     
 while running:
     if (GPIO.input(button) == GPIO.HIGH):
@@ -113,6 +121,7 @@ while running:
                 d.write(audio2.get_wav_data())
                 
             data2=b.recognize_google(audio2)
+            print(data2)
 
             distance()
             if(data2 == data):
@@ -139,11 +148,4 @@ while running:
         else:
             running = False
 
-
-window = Tk()
-window.geometry("500x500")
-clear_button = Button(master = window, command = clear, height = 2, width = 10, text = "Clear")
-clear_button.pack()
 window.mainloop()
-
-
