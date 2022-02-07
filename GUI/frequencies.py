@@ -13,8 +13,8 @@ import subprocess
 
 
 def distance():
-    input_data = read(r"C:\Users\r2d26\OneDrive\Desktop\Elenahelpstuff\speech.wav")
-    password_data = read(r"C:\Users\r2d26\OneDrive\Desktop\Elenahelpstuff\speech2.wav")
+    input_data = read(r"/home/pi/speech.wav")
+    password_data = read(r"/home/pi/speech2.wav")
     audio2 = password_data[1]
     audio = input_data[1]
 
@@ -31,8 +31,8 @@ def distance():
 def plot():
     fig = Figure(figsize = (7,7), dpi = 100)
     
-    password_data = read(r"C:\Users\r2d26\OneDrive\Desktop\Elenahelpstuff\speech.wav")#
-    input_data = read(r"C:\Users\r2d26\OneDrive\Desktop\Elenahelpstuff\speech2.wav")
+    password_data = read(r"/home/pi/speech.wav")#
+    input_data = read(r"/home/pi/speech2.wav")
     input1 = input_data[1]
     
     password3 = password_data[1]
@@ -73,7 +73,7 @@ for i in range(0,5):
         audio = a.listen(source)
 
         # new addition to save the recording
-        with open(r"C:\Users\r2d26\OneDrive\Desktop\Elenahelpstuff\speech.wav", 'wb') as f:
+        with open(r"/home/pi/speech.wav", 'wb') as f:
             f.write(audio.get_wav_data())
 
 
@@ -100,7 +100,7 @@ while running:
             audio2 = b.listen(source)
             
             # new addition to save the recording
-            with open(r"C:\Users\r2d26\OneDrive\Desktop\Elenahelpstuff\speech2.wav", 'wb') as d:
+            with open(r"/home/pi/speech2.wav", 'wb') as d:
                 d.write(audio2.get_wav_data())
                 
             data2=b.recognize_google(audio2)
