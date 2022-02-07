@@ -30,19 +30,15 @@ def distance():
 
         
 def plot():
-<<<<<<< HEAD
+
     fig = Figure(figsize = (5,5), dpi = 100)
     
-=======
+
     plt.figure(1, figsize = (30, 10))
-<<<<<<< HEAD
->>>>>>> e55739dda0ed4b6b495edb0bb42974017fed42d3
-    password_data = read(r"C:\Users\r2d26\OneDrive\Desktop\Elenahelpstuff\speech.wav")#
-    input_data = read(r"C:\Users\r2d26\OneDrive\Desktop\Elenahelpstuff\speech2.wav")
-=======
+
     password_data = read(r"/home/pi/speech.wav")
     input_data = read(r"/home/pi/speech2.wav")
->>>>>>> 3dac0bc546a78c760101837253e99d645146c93e
+
     input1 = input_data[1]
     
     password3 = password_data[1]
@@ -72,17 +68,8 @@ canvas_width=200
 
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> e55739dda0ed4b6b495edb0bb42974017fed42d3
-#GPIO.setmode(GPIO.BCM)
-#GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-=======
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
->>>>>>> 3dac0bc546a78c760101837253e99d645146c93e
 
 a = sr.Recognizer()
 #plot()
@@ -135,25 +122,15 @@ while running:
     elif(GPIO.input(button)==GPIO.LOW):
         print("Push the button to record audio...")
         sleep(5)
-<<<<<<< HEAD
-        if(keyboard.is_pressed('ctrl')):
-=======
         if(GPIO.input(button)==GPIO.HIGH):
->>>>>>> 3dac0bc546a78c760101837253e99d645146c93e
             running = True
         else:
             running = False
 
-<<<<<<< HEAD
+
 window = Tk()
 window.geometry("500x500")
 
 window.mainloop()
 
         
-
-=======
-        
-
-window.mainloop()
->>>>>>> e55739dda0ed4b6b495edb0bb42974017fed42d3
