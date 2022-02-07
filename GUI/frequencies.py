@@ -63,7 +63,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 a = sr.Recognizer()
-plot()
+#plot()
 
 with sr.Microphone() as source:
     print("Record a password...")
