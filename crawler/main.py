@@ -1,7 +1,8 @@
 import requests
 from key import API_KEY
-import pyttsx3
+#import pyttsx3
 from Article import *
+import os
 
 response = requests.Session()
 
@@ -34,8 +35,9 @@ def speak(article):
 
 
     text = article.getTitle()
-    engine.say(text)
-    engine.runAndWait()
+    os.system("say" + text)
+    #engine.say(text)
+    #engine.runAndWait()
 
 for article in articleObjs:
     speak(article)
