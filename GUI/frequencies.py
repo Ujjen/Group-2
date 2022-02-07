@@ -30,8 +30,12 @@ def distance():
 
         
 def plot():
+<<<<<<< HEAD
     fig = Figure(figsize = (5,5), dpi = 100)
     
+=======
+    plt.figure(1, figsize = (30, 10))
+>>>>>>> e55739dda0ed4b6b495edb0bb42974017fed42d3
     password_data = read(r"C:\Users\r2d26\OneDrive\Desktop\Elenahelpstuff\speech.wav")#
     input_data = read(r"C:\Users\r2d26\OneDrive\Desktop\Elenahelpstuff\speech2.wav")
     input1 = input_data[1]
@@ -54,15 +58,24 @@ def plot():
 button = 25
 running = True
 
+window = Tk()
+w = Canvas(window, width=40, height=60)
+w.pack()
+canvas_height=20
+canvas_width=200
 
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> e55739dda0ed4b6b495edb0bb42974017fed42d3
 #GPIO.setmode(GPIO.BCM)
 #GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 a = sr.Recognizer()
+plot()
 
 
 with sr.Microphone() as source:
@@ -117,6 +130,7 @@ while running:
         else:
             running = False
 
+<<<<<<< HEAD
 window = Tk()
 window.geometry("500x500")
 
@@ -124,3 +138,8 @@ window.mainloop()
 
         
 
+=======
+        
+
+window.mainloop()
+>>>>>>> e55739dda0ed4b6b495edb0bb42974017fed42d3
