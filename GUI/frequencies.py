@@ -7,38 +7,46 @@ from scipy.io.wavfile import read
 from time import sleep
 import speech_recognition as sr
 import wave
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 import math
 import subprocess
+import keyboard
 
 
 def distance():
-    input_data = read(r"/home/pi/speech2.wav")
-    password_data = read(r"/home/pi/speech.wav")
+    input_data = read(r"C:\Users\r2d26\OneDrive\Desktop\Elenahelpstuff\speech.wav")
+    password_data = read(r"C:\Users\r2d26\OneDrive\Desktop\Elenahelpstuff\speech2.wav")
     audio2 = password_data[1]
     audio = input_data[1]
 
-    print(sum(audio2) / len(audio2))
-    print(sum(audio) / len(audio))
+    x=(sum(audio2) / len(audio2))
+    y = (sum(audio) / len(audio2))
 
-    print((sum(audio2)+sum(audio))/2)
+    print(x)
+    print(y)
+
+    print((x+y)/2)
     return True
 
         
 def plot():
-    plt.figure(1, figsize = (30, 10))
-    password_data = read(r"/home/pi/speech.wav")#
-    input_data = read(r"/home/pi/speech2.wav")
+    fig = Figure(figsize = (5,5), dpi = 100)
+    
+    password_data = read(r"C:\Users\r2d26\OneDrive\Desktop\Elenahelpstuff\speech.wav")#
+    input_data = read(r"C:\Users\r2d26\OneDrive\Desktop\Elenahelpstuff\speech2.wav")
     input1 = input_data[1]
     
     password3 = password_data[1]
 
-    plt.subplot(211)
-    plt.plot(input1)
+    plot1 = fig.add_subplot(111)
+    plot1.plot(input1)
 
-    plt.subplot(212)
-    plt.plot(password3)
-    plt.show()
+    plot2 = fig.add_subplot(212)
+    plot2.plot(password3)
+    
+    canvas = FigureCanvasTkAgg(fig, master = window)
+    canvas.draw()
+    canvas.get_tk_widget().pack()
     
     distance()
 
@@ -47,34 +55,39 @@ button = 25
 running = True
 
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
+
+
+
+#GPIO.setmode(GPIO.BCM)
+#GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 a = sr.Recognizer()
+
 
 with sr.Microphone() as source:
     print("Record a password...")
     audio = a.listen(source)
 
         # new addition to save the recording
-    with open(r"/home/pi/speech2.wav", 'wb') as f:
+    with open(r"C:\Users\r2d26\OneDrive\Desktop\Elenahelpstuff\speech.wav", 'wb') as f:
         f.write(audio.get_wav_data())
 
-        temp = read(r"/home/pi/speech2.wav")
+        temp = read(r"C:\Users\r2d26\OneDrive\Desktop\Elenahelpstuff\speech.wav")
         temp_list = temp[1]
         tempAvg = sum(temp) / len(temp)
         data=a.recognize_google(audio)
         print("password saved.")
         
 while running:
-    if (GPIO.input(button) == GPIO.HIGH):
+    if (keyboard.is_pressed('ctrl')):
         with sr.Microphone() as source:
             b = sr.Recognizer()
             print("Say something...")
             audio2 = b.listen(source)
             
             # new addition to save the recording
-            with open(r"/home/pi/speech.wav", 'wb') as d:
+            with open(r"C:\Users\r2d26\OneDrive\Desktop\Elenahelpstuff\speech2.wav", 'wb') as d:
                 d.write(audio2.get_wav_data())
                 
             data2=b.recognize_google(audio2)
@@ -96,13 +109,18 @@ while running:
             else:
                 print("wrong password try again")
                 
-    elif(GPIO.input(button) == GPIO.LOW):
+    elif(keyboard.is_pressed('ctrl')):
         print("Push the button to record audio...")
         sleep(5)
-        if(keyboard.is_pressed('q')):
+        if(keyboard.is_pressed('ctrl')):
             running = True
         else:
             running = False
-        
 
+window = Tk()
+window.geometry("500x500")
+
+window.mainloop()
+
+        
 
