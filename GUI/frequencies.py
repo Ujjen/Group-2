@@ -10,12 +10,11 @@ import wave
 import RPi.GPIO as GPIO
 import math
 import subprocess
-#import keyboard
 
 
 def distance():
-    input_data = read(r"/home/pi/speech.wav")
-    password_data = read(r"/home/pi/speech2.wav")
+    input_data = read(r"C:\Users\r2d26\OneDrive\Desktop\Elenahelpstuff\speech.wav")
+    password_data = read(r"C:\Users\r2d26\OneDrive\Desktop\Elenahelpstuff\speech2.wav")
     audio2 = password_data[1]
     audio = input_data[1]
 
@@ -30,6 +29,7 @@ def distance():
 
         
 def plot():
+<<<<<<< HEAD
 
     fig = Figure(figsize = (5,5), dpi = 100)
     
@@ -39,14 +39,22 @@ def plot():
     password_data = read(r"/home/pi/speech.wav")
     input_data = read(r"/home/pi/speech2.wav")
 
+=======
+    fig = Figure(figsize = (7,7), dpi = 100)
+    
+    password_data = read(r"C:\Users\r2d26\OneDrive\Desktop\Elenahelpstuff\speech.wav")#
+    input_data = read(r"C:\Users\r2d26\OneDrive\Desktop\Elenahelpstuff\speech2.wav")
+>>>>>>> c9a9ad72937972f1d6bfc0f5ca7523f15a9bb376
     input1 = input_data[1]
     
     password3 = password_data[1]
 
-    plot1 = fig.add_subplot(111)
+    #plot1 = fig.add_subplot(111)
+    plot1 = fig.add_subplot(150)
     plot1.plot(input1)
 
-    plot2 = fig.add_subplot(212)
+    #plot2 = fig.add_subplot(212)
+    plot2 = fig.add_subplot(275)
     plot2.plot(password3)
     
     canvas = FigureCanvasTkAgg(fig, master = window)
@@ -55,49 +63,59 @@ def plot():
     
     distance()
 
+def clear():
+    exit()
 
 button = 25
 running = True
 
-window = Tk()
-w = Canvas(window, width=40, height=60)
-w.pack()
-canvas_height=20
-canvas_width=200
 
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> c9a9ad72937972f1d6bfc0f5ca7523f15a9bb376
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 a = sr.Recognizer()
-#plot()
-
-
-with sr.Microphone() as source:
-    print("Record a password...")
-    audio = a.listen(source)
+avgL = [] 
+for i in range(0,5):
+    with sr.Microphone() as source:
+        print("Record a password...")
+        audio = a.listen(source)
 
         # new addition to save the recording
-    with open(r"/home/pi/speech.wav", 'wb') as f:
-        f.write(audio.get_wav_data())
+        with open(r"C:\Users\r2d26\OneDrive\Desktop\Elenahelpstuff\speech.wav", 'wb') as f:
+            f.write(audio.get_wav_data())
 
-        temp = read(r"/home/pi/speech.wav")
-        temp_list = temp[1]
-        tempAvg = sum(temp) / len(temp)
-        data=a.recognize_google(audio)
-        print("password saved.")
-        
+
+
+        ###
+            temp_data = read(r"path of wav file")
+            temp = temp_data[1]
+            avgL.append(sum(temp)/len(temp))
+        ###
+
+            data=a.recognize_google(audio)
+            print("password saved.")
+
+###
+    avg = (sum(avgL) / len(avgL))
+###
+
+    
 while running:
-    if (GPIO.input(button) == GPIO.HIGH):
+    if (GPIO.output == HIGH):
         with sr.Microphone() as source:
             b = sr.Recognizer()
             print("Say something...")
             audio2 = b.listen(source)
             
             # new addition to save the recording
-            with open(r"/home/pi/speech2.wav", 'wb') as d:
+            with open(r"C:\Users\r2d26\OneDrive\Desktop\Elenahelpstuff\speech2.wav", 'wb') as d:
                 d.write(audio2.get_wav_data())
                 
             data2=b.recognize_google(audio2)
@@ -119,18 +137,30 @@ while running:
             else:
                 print("wrong password try again")
                 
-    elif(GPIO.input(button)==GPIO.LOW):
+    elif(GPIO.output == LOW):
         print("Push the button to record audio...")
         sleep(5)
+<<<<<<< HEAD
         if(GPIO.input(button)==GPIO.HIGH):
+=======
+        if(GPIO.output == HIGH)):
+>>>>>>> c9a9ad72937972f1d6bfc0f5ca7523f15a9bb376
             running = True
         else:
             running = False
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> c9a9ad72937972f1d6bfc0f5ca7523f15a9bb376
 window = Tk()
 window.geometry("500x500")
-
+clear_button = Button(master = window, command = clear, height = 2, width = 10, text = "Clear")
+clear_button.pack()
 window.mainloop()
 
         
+<<<<<<< HEAD
+=======
+
+>>>>>>> c9a9ad72937972f1d6bfc0f5ca7523f15a9bb376
