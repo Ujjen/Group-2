@@ -99,7 +99,7 @@ while running:
     elif(GPIO.input(button) == GPIO.LOW):
         print("Push the button to record audio...")
         sleep(5)
-        if(keyboard.is_pressed('q')):
+        if(GPIO.input(button) == GPIO.HIGH):
             running = True
         else:
             running = False
