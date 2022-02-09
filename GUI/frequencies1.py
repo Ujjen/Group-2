@@ -16,8 +16,8 @@ def clear():
 
 
 def distance():
-    input_data = read(r"/home/pi/Desktop/wavfiles/speech2.wav")
-    password_data = read(r"/home/pi/Desktop/wavfiles/speech.wav")
+    input_data = read(r"/home/pi/speech2.wav")
+    password_data = read(r"/home/pi/speech.wav")
     audio2 = password_data[1]
     audio = input_data[1]
 
@@ -38,8 +38,8 @@ def distance():
 def plot():
     fig = Figure(figsize = (10,10), dpi = 65)
     
-    password_data = read(r"/home/pi/Desktop/wavfiles/speech.wav")#
-    input_data = read(r"/home/pi/Desktop/wavfiles/speech2.wav")
+    password_data = read(r"/home/pi/speech.wav")#
+    input_data = read(r"/home/pi/speech2.wav")
     input1 = input_data[1]
     
     password = password_data[1]
@@ -81,10 +81,10 @@ for i in range (0,3):
         audio = a.listen(source)
 
         # new addition to save the recording
-        with open(r"/home/pi/Desktop/wavfiles/speech.wav", 'wb') as f:
+        with open(r"/home/pi/speech.wav", 'wb') as f:
             f.write(audio.get_wav_data())
 
-            temp = read(r"/home/pi/Desktop/wavfiles/speech.wav")
+            temp = read(r"/home/pi/speech.wav")
             avgL.append(sum(temp[1]) / len(temp[1]))
             data=a.recognize_google(audio)
             print("password saved.")
@@ -101,7 +101,7 @@ while running:
             audio2 = b.listen(source)
             
             # new addition to save the recording
-            with open(r"/home/pi/Desktop/wavfiles/speech2.wav", 'wb') as d:
+            with open(r"/home/pi/speech2.wav", 'wb') as d:
                 d.write(audio2.get_wav_data())
                 
             data2=b.recognize_google(audio2)
