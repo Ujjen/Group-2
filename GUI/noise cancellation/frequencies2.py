@@ -26,7 +26,7 @@ def distance():
     # if statement to decide if the input is close enough to the avg password data
     print("avg "+str(avg))
     print("avg input "+str(avg_input))
-    if (avg_input >= avg - 50) and (avg_input <= avg + 50):
+    if (avg_input >= avg - 5) and (avg_input <= avg + 5):
         print(avg_input)
         print(avg)
         return True
