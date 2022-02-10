@@ -80,7 +80,7 @@ for i in range (0,3):
     with sr.Microphone() as source:
         #a.adjust_for_ambient_noise(source)
         print("Record a password...")
-        audio = a.listen(source, timeout=2)
+        audio = a.listen(source, timeout=5)
 
         # new addition to save the recording
         with open(r"/home/pi/speech.wav", 'wb') as f:
@@ -103,7 +103,7 @@ while running:
             b = sr.Recognizer()
             #b.adjust_for_ambient_noise(source)
             print("Say something...")
-            audio2 = b.listen(source, timeout=2)
+            audio2 = b.listen(source, timeout=5)
             
             # new addition to save the recording
             with open(r"/home/pi/speech2.wav", 'wb') as d:
