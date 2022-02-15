@@ -11,6 +11,7 @@ import RPi.GPIO as GPIO
 import math
 import subprocess
 
+# for the button on the GUI, when pressed it asks to kill the program and shuts everything down
 def clear():
     exit()
 
@@ -20,7 +21,8 @@ def distance():
     password_data = read(r"/home/pi/speech.wav")
     audio2 = password_data[1]
     audio = input_data[1]
-    
+
+    # getting the average of the input audio
     avg_input = (sum(audio) / len(audio))
 
     # if statement to decide if the input is close enough to the avg password data
@@ -34,7 +36,7 @@ def distance():
         return False
     
 
-#graph for different frequencies         
+#graph for different frequencies that is displayed on the GUI        
 def plot():
     fig = Figure(figsize = (10,10), dpi = 65)
     
@@ -44,15 +46,17 @@ def plot():
     
     password = password_data[1]
 
+    # graphing the password frequency
     plot1 = fig.add_subplot(211)
     plot1.set_title("Password Data")
     plot1.plot(password)
     
-
+    # graphing the input frequency
     plot2 = fig.add_subplot(212)
     plot2.plot(input1)
     plot2.set_title("Input Data")
-    
+
+    # creating the physical graph
     canvas = FigureCanvasTkAgg(fig, master = window)
     canvas.draw()
     canvas.get_tk_widget().pack()
@@ -66,10 +70,14 @@ denied = False
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
+######## GUI #############
+
 window = Tk()
 window.geometry("800x800")
 clear_button = Button(master = window, text = "Clear", command = lambda : clear())
 clear_button.pack()
+
+##########################
 
 a = sr.Recognizer()
 
@@ -92,6 +100,7 @@ for i in range (0,3):
             print("password saved.")
             #print(data)
 
+# getting the average of all the password inputs if prompted for more than one iteration
 print(avgL)
 avg = (sum(avgL) / len(avgL))
 print(avg)
@@ -101,14 +110,16 @@ while running:
     if (GPIO.input(button) == GPIO.HIGH):
         with sr.Microphone() as source:
             b = sr.Recognizer()
-            #b.adjust_for_ambient_noise(source)
+            # noise reduction to help with excess noise
+            b.adjust_for_ambient_noise(source)
             print("Say something...")
             audio2 = b.listen(source, timeout=5)
             
-            # new addition to save the recording
+            # save the password setter recording as a wav file
             with open(r"/home/pi/speech2.wav", 'wb') as d:
                 d.write(audio2.get_wav_data())
-                
+
+            # save the input recording as a wav file   
             data2=b.recognize_google(audio2)
             with open(r"/home/pi/speech2.wav", 'wb') as d:
                 d.write(audio2.get_wav_data())
@@ -132,7 +143,7 @@ while running:
                 print("wrong password try again")
 
 
-                
+    # setting the button on breadboard to record when button is pushed           
     elif(GPIO.input(button) == GPIO.LOW):
         print("Push the button to record audio...")
         
